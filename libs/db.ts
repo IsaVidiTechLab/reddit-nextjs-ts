@@ -1,18 +1,15 @@
-import mongoose, { ConnectOptions } from "mongoose"
+import mongoose, { ConnectOptions } from 'mongoose';
 
-const connectMongoDB = async () => {
+const connectMongoDB = async (): Promise<void> => {
+  try {
+    await mongoose.connect(process.env.MONGODB_URI || '', {
+      useNewUrlParser: true,  
+      useUnifiedTopology: true,
+    } as ConnectOptions);
+    console.log('MongoDB connected');
+  } catch (error) {
+    console.log(error);
+  }
+};
 
-    try {
-        await mongoose.connect(process.env.MONGO_URI || "", { 
-            useNewUrlParser: true, 
-            useUnifiedTopology: true 
-        } as ConnectOptions)
-        console.log("MongoDB connected")
-        } catch (err) {
-            console.log(err)
-        }
-
-
-}
-
-export default connectMongoDB
+export default connectMongoDB;

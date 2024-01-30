@@ -24,10 +24,10 @@ export async function POST(req: NextRequest){
         const token = jwt.sign({ email }, jwtSecret, { expiresIn: '1d' });
         const response = NextResponse.json({ message: "User created successfully" }, { status: 200 })
         response.cookies.set("token", token)
-        
+        return response;
     } catch (error) {
-        console.log(error)
+        return NextResponse.json({ error: 'Error creating User' }, { status: 500 });
+
     }
-    return NextResponse.json({ message: "Ok"})
 
 }

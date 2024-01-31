@@ -25,7 +25,7 @@ export async function POST(req: NextRequest){
     // const hashPassword = await bcrypt.hashSync(password, 10)
         const jwtSecret = process.env.JWT_SECRET as string;
         const token = jwt.sign({ email }, jwtSecret, { expiresIn: '1d' });
-        const response = NextResponse.json({ message: "User successfully logged in" }, { status: 200 })
+        const response = NextResponse.json({ authToken: token }, { status: 200 })
         response.cookies.set("token", token)
         return response;
     } catch (error) {

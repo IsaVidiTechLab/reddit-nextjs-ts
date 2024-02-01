@@ -21,7 +21,7 @@ export default function Home() {
   const getUserDEtails = async () => { 
     try{
       const res = await axios.get('/api/me')
-      console.log(res.data)
+      console.log(res.data.data.usename)
       setData(res.data.data.username)
     } catch (error) {
       console.log(error)

@@ -4,13 +4,12 @@ import  { Schema } from "mongoose";
 import { NextResponse, NextRequest } from "next/server";
 
 interface Postdata {
-    userId: Schema.Types.ObjectId;
+    newUserId: Schema.Types.ObjectId;
     newImage: string;
     newDescription: string;
 }
 
 interface PostdataGet {
-    userId: Schema.Types.ObjectId;
     image: string;
     description: string;
 }
@@ -26,10 +25,14 @@ export async function GET(req: NextRequest, {params}: {params: any}){
     }
 }
 
-export async function PUT (req: NextRequest, params: {id: string}){
-    const { id } = params;
-    const { newImage: image, newDescription: description }: Postdata = await req.json();
-    await connectMongoDB()
-    await Post.findByIdAndUpdate(id, {image, description})
-    return NextResponse.json({message: 'Post updated'}, {status: 200})
+export async function PUT (req: NextRequest, {params}: {params: any}){
+   try {
+        const { id }: {id: string | null} = params;
+        const { newImage: image, newDescription: description }: Postdata = await req.json();
+        await connectMongoDB()
+        await Post.findByIdAndUpdate(id, { image, description})
+        return NextResponse.json({message: 'Post updated'}, {status: 200})}
+    catch(err){
+        return NextResponse.json({message: 'Failed to update Post',err}, {status: 500})
+    }
 }

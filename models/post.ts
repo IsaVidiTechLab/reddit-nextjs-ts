@@ -14,6 +14,6 @@ const PostSchema: Schema = new Schema({
 
 
 
-const Post: Model<IPost> = mongoose.models.User || mongoose.model<IPost>("Post", PostSchema)
+const Post: Model<IPost> = mongoose.models.Post || mongoose.model<IPost>("Post", PostSchema)
 
 export default Post

@@ -25,3 +25,11 @@ export async function GET(req: NextRequest, {params}: {params: any}){
         return NextResponse.json({error: 'Error fetching post'}, {status: 500})
     }
 }
+
+export async function PUT (req: NextRequest, params: {id: string}){
+    const { id } = params;
+    const { newImage: image, newDescription: description }: Postdata = await req.json();
+    await connectMongoDB()
+    await Post.findByIdAndUpdate(id, {image, description})
+    return NextResponse.json({message: 'Post updated'}, {status: 200})
+}

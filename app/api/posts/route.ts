@@ -30,3 +30,10 @@ export async function GET() {
       return NextResponse.json({error: 'Error fetching posts',err}, {status: 500})
     }
   }
+
+export async function DELETE (req: NextRequest){
+    const id = req.nextUrl.searchParams.get('id')
+    await connectMongoDB()
+    await Post.findByIdAndDelete(id)
+    return NextResponse.json({message: 'Post deleted'}, {status: 200})
+}

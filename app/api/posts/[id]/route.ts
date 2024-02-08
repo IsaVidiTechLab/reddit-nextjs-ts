@@ -4,7 +4,6 @@ import  { Schema } from "mongoose";
 import { NextResponse, NextRequest } from "next/server";
 
 interface Postdata {
-    newUserId: Schema.Types.ObjectId;
     newImage: string;
     newDescription: string;
 }

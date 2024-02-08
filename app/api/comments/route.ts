@@ -24,3 +24,24 @@ export async function DELETE(req: NextRequest) {
       return NextResponse.json({ error: 'Error deleting Comment' }, { status: 500 });
     }
   }
+export async function POST(req : NextRequest){
+    try{
+        const {userId, postId, username,comment} : Commentdata = await req.json();
+        await connectMongoDB();
+        await Comment.create({userId,postId,username,comment});
+        return NextResponse.json({message : 'Comment created'}, {status: 201})
+    }catch(err)
+    {
+        return NextResponse.json({ error: 'Error creating Comment', err }, { status: 500 });
+    }
+}
+
+export async function GET(req: NextRequest){
+  try {
+    await connectMongoDB();
+    const comments: Commentdata[] = await Comment.find()
+    return NextResponse.json({comments})
+  } catch(err) {
+    return NextResponse.json({error: 'Error fetching posts',err}, {status: 500})
+  }
+}

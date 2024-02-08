@@ -13,7 +13,7 @@ const CommentSchema: Schema = new Schema({
     username: { type: String },
     comment: { type: String }
 })
-
+ 
 
 
 const Comment: Model<IComment> = mongoose.models.Comment || mongoose.model<IComment>("Comment", CommentSchema)

@@ -10,3 +10,17 @@ interface Commentdata {
     comment: string;
 }
 
+
+export async function DELETE(req: NextRequest) {
+    try {
+      const id: string | null = req.nextUrl.searchParams.get('id') as string;
+      if (!id) {
+        return NextResponse.json({ error: 'Missing id parameter' }, { status: 400 });
+      }
+      await connectMongoDB();
+      await Comment.findByIdAndDelete(id);
+      return NextResponse.json({ message: 'Comment deleted' }, { status: 200 });
+    } catch (error) {
+      return NextResponse.json({ error: 'Error deleting Comment' }, { status: 500 });
+    }
+  }

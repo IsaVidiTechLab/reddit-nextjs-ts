@@ -20,6 +20,7 @@ export async function GET(req: NextRequest, {params}: {params: any}){
         const post: PostdataGet | null = await Post.findOne({_id: id});
         return NextResponse.json({post});
     } catch(error){ 
+    
         return NextResponse.json({error: 'Error fetching post'}, {status: 500})
     }
 }

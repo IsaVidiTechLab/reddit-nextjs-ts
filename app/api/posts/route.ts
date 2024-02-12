@@ -5,15 +5,16 @@ import { NextResponse, NextRequest } from "next/server";
 
 interface Postdata {
     userId: Schema.Types.ObjectId;
+    username: string;
     image: string;
     description: string;
 }
 
 export async function POST(req : NextRequest){
     try{
-        const {userId, image, description} : Postdata = await req.json();
+        const {userId, username, image, description} : Postdata = await req.json();
         await connectMongoDB();
-        await Post.create({userId,image,description});
+        await Post.create({userId, username, image,description});
         return NextResponse.json({message : 'Post created'}, {status: 201})
     }catch(err)
     {

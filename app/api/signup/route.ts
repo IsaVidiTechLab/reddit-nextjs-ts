@@ -4,7 +4,6 @@ import bcrypt from "bcrypt";
 import connectMongoDB from "@/libs/db";
 import jwt from "jsonwebtoken";
 
-
 export async function POST(req: NextRequest){
     
     const { username, email, password } = await req.json()
@@ -23,7 +22,7 @@ export async function POST(req: NextRequest){
         const jwtSecret = process.env.JWT_SECRET as string;
         const token = jwt.sign({username, email }, jwtSecret, { expiresIn: '1hr' });
         const response = NextResponse.json({ message: "User created successfully" }, { status: 200 })
-        response.cookies.set("token", token)
+        // response.cookies.set("token", token)
         return response;
     } catch (error) {
         return NextResponse.json({ error: 'Error creating User' }, { status: 500 });

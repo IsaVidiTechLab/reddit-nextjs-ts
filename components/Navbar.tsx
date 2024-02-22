@@ -51,7 +51,7 @@ const Navbar: React.FC = () => {
            <Link href="/my-posts">
             <p className='text-sm'>My Posts</p>
           </Link>
-          <button onClick={handleLogout} className=" px-2 py-1 border border-orange-700 rounded-md ml-4 text-sm">Log Out</button>
+          <button onClick={handleLogout} className=" p-2 py-1 bg-orange-700 rounded-md ml-4 text-sm">Log Out</button>
           </>
         )}
 
